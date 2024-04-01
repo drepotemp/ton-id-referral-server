@@ -19,6 +19,8 @@ const BotUser = model(
   })
 );
 
+app.options("*", cors()); // Enable preflight OPTIONS request for all routes
+
 app.use(cors({
     origin: '*'
   }));
