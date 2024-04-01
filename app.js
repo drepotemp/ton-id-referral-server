@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const { Schema, model, default: mongoose } = require("mongoose");
+const cors = require("cors")
 
 const BotUser = model(
   "BotUser",
