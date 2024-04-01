@@ -34,7 +34,7 @@ app.get("/", (req, res)=>{
 app.post("/referUser/:referralLink", async (req, res) => {
     const referralLink = req.params.referralLink;
     if (!referralLink) {
-      res.status(404).json({
+      res.status(401).json({
         success: true,
         message:
           "This link does not exist. Please ask its owner to send you a valid link.",
@@ -63,7 +63,7 @@ app.post("/referUser/:referralLink", async (req, res) => {
           data: { name: linkOwner.name, username: linkOwner.username },
         });
       } else {
-        res.status(404).json({
+        res.status(401).json({
           success: true,
           message:
             "This link does not exist. Please ask its owner to send you a valid link.",
