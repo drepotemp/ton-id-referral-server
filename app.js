@@ -18,6 +18,8 @@ const BotUser = model(
   })
 );
 
+app.use(cors())
+
 app.get("/", (req, res)=>{
     res.send("Referral hello World")
 })
