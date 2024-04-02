@@ -2,7 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const { Schema, model, default: mongoose } = require("mongoose");
-const cors = require("cors")
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const BotUser = model(
   "BotUser",
@@ -19,6 +20,11 @@ const BotUser = model(
   })
 );
 
+// Parse URL-encoded bodies (deprecated in Express v4.16+)
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// Parse JSON bodies
+app.use(express.json());
 app.options("*", cors()); // Enable preflight OPTIONS request for all routes
 
 app.use(cors({
@@ -34,7 +40,7 @@ app.get("/", (req, res)=>{
 app.post("/referUser/:referralLink", async (req, res) => {
     const referralLink = req.params.referralLink;
     if (!referralLink) {
-      res.status(401).json({
+      res.status(404).json({
         success: true,
         message:
           "This link does not exist. Please ask its owner to send you a valid link.",
@@ -63,7 +69,7 @@ app.post("/referUser/:referralLink", async (req, res) => {
           data: { name: linkOwner.name, username: linkOwner.username },
         });
       } else {
-        res.status(401).json({
+        res.status(404).json({
           success: true,
           message:
             "This link does not exist. Please ask its owner to send you a valid link.",
