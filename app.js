@@ -47,7 +47,7 @@ app.post("/referUser/:referralLink", async (req, res) => {
       });
     }
   
-    const linkFirstChunk = "tonid.vercel.app/refer?inviteId="
+    const linkFirstChunk = "tonidentity.com/refer?inviteId="
     const givenReferralLink = linkFirstChunk+referralLink
   
     try {
